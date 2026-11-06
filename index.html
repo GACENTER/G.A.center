@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="G.A CENTER — Diseño y Desarrollo de Páginas Web con dominio propio o sin dominio. Catálogos, turneros, concesionarias y sitios profesionales listos para vender." />
+  <title>G.A CENTER | Diseño y Desarrollo de Páginas Web</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            ga: {
+              bg: '#04050a',
+              surface: '#090c15',
+              elevated: '#101524',
+              violet: '#8b5cf6',
+              purple: '#7c3aed',
+              blue: '#38bdf8',
+              cyan: '#06b6d4',
+              mint: '#2dd4bf',
+            }
+          },
+          borderRadius: {
+            '4xl': '2.25rem',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+      --ga-violet: #8b5cf6;
+      --ga-blue: #38bdf8;
+      --ga-mint: #2dd4bf;
+    }
+
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background-color: #04050a;
+      color: #f8fafc;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #04050a; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #8b5cf6, #38bdf8, #2dd4bf);
+      border-radius: 9999px;
+    }
+
+    /* Gradientes G.A CENTER */
+    .ga-gradient-text {
+      background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #2dd4bf 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .ga-gradient-bg {
+      background: linear-gradient(135deg, #7c3aed 0%, #0284c7 52%, #14b8a6 100%);
+    }
+
+    /* Antigravity Design Expert: Spatial Depth & Weightless Glassmorphism */
+    .ag-surface {
+      background: linear-gradient(160deg, rgba(16, 21, 38, 0.86) 0%, rgba(8, 11, 21, 0.94) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .ag-float-card {
+      transition: transform 0.35s var(--ease-out-expo), border-color 0.3s ease;
+    }
+    .ag-float-card:hover {
+      transform: translate3d(0, -6px, 0);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    /* ==========================================================
+       1. KINETIC TEXT LOADER
+       ========================================================== */
+    #kinetic-loader {
+      transition: opacity 0.55s var(--ease-out-expo), visibility 0.55s;
+    }
+    #kinetic-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    @keyframes kineticBounce {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(0, -10px, 0) scale(1.06); }
+    }
+    .kinetic-char {
+      display: inline-block;
+      animation: kineticBounce 0.85s var(--ease-out-expo) infinite;
+    }
+
+    /* ==========================================================
+       2. SPOTLIGHT NAVBAR
+       ========================================================== */
+    .spotlight-nav-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-nav-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        200px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+        rgba(56, 189, 248, 0.22),
+        rgba(139, 92, 246, 0.12) 45%,
+        transparent 80%
+      );
+      opacity: var(--spot-opacity, 0);
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    /* ==========================================================
+       3. RADIAL GLOW BUTTON (Seamless, sin cortes ni bordes duros)
+       ========================================================== */
+    .radial-glow-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(19, 25, 46, 0.95) 0%, rgba(11, 15, 29, 0.98) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      box-shadow: 0 8px 24px -6px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease-out-expo), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .radial-glow-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        140px circle at var(--btn-x, 50%) var(--btn-y, 50%),
+        rgba(56, 189, 248, 0.38) 0%,
+        rgba(139, 92, 246, 0.24) 45%,
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .radial-glow-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(139, 92, 246, 0.16) 0%, rgba(56, 189, 248, 0.16) 50%, rgba(45, 212, 191, 0.16) 100%);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .radial-glow-btn:hover::before {
+      opacity: 1;
+    }
+    .radial-glow-btn:hover {
+      border-color: rgba(45, 212, 191, 0.8);
+      box-shadow: 0 12px 30px -6px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transform: translate3d(0, -2px, 0);
+    }
+    .radial-glow-btn:active {
+      transform: scale(0.97);
+    }
+    .radial-glow-btn > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================================
+       4. SOCIAL FLIP BUTTON
+       ========================================================== */
+    .social-flip-btn {
+      display: inline-block;
+      height: 46px;
+      perspective: 1000px;
+      text-decoration: none;
+    }
+    .social-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s var(--ease-out-expo);
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+    .social-flip-btn:hover .social-flip-inner,
+    .social-flip-btn:focus-visible .social-flip-inner {
+      transform: rotateX(180deg);
+    }
+    .social-flip-front,
+    .social-flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0 1.1rem;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .social-flip-front {
+      background: rgba(15, 20, 36, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+    }
+    .social-flip-back {
+      transform: rotateX(180deg);
+      color: #ffffff;
+    }
+    .social-flip-back.whatsapp {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    }
+    .social-flip-back.instagram {
+      background: linear-gradient(135deg, #7c3aed 0%, #db2777 55%, #f59e0b 100%);
+    }
+
+    /* ==========================================================
+       5. CLEAN MORPHING WORD (Sin distorsión borrosa)
+       ========================================================== */
+    .hero-morph-word {
+      display: inline-block;
+      transition: transform 0.35s var(--ease-out-expo), opacity 0.35s var(--ease-out-expo);
+    }
+    .hero-morph-word.is-switching {
+      opacity: 0;
+      transform: translate3d(0, 12px, 0) scale(0.96);
+    }
+
+    /* ==========================================================
+       6. HERO GRID STAGE (index (3).tsx: Drafting + Revenue + Keys + Icons + Player)
+       ========================================================== */
+    .hg-cursor {
+      transition: transform 0.55s var(--ease-out-expo);
+      pointer-events: none;
+    }
+    .hg-frame-box {
+      border: 1.5px dashed rgba(139, 92, 246, 0.45);
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .hg-frame-box[data-selected="true"] {
+      border-style: solid;
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .hg-keycap {
+      background: linear-gradient(180deg, #1b2238 0%, #111626 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 3px 0 #070a12, inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-radius: 9px;
+      transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+    .hg-keycap.active-key {
+      transform: translate3d(0, 2px, 0);
+      border-color: #2dd4bf;
+      background: linear-gradient(180deg, #7c3aed 0%, #2563eb 100%);
+    }
+
+    /* ==========================================================
+       7. DARK HERO DEPLOYMENTS (index (2).tsx) & HERO DEMO (HeroDemo.tsx)
+       ========================================================== */
+    .dh-collapse {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translate3d(0, -8px, 0);
+      transition: max-height 0.45s var(--ease-out-expo), opacity 0.35s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
+    }
+    .dh-collapse.is-open {
+      max-height: 82px;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ==========================================================
+       8. SKIPER 40: ANIMATED LINKS
+       ========================================================== */
+    .skiper-link-001 {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .skiper-link-001::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 1.5px;
+      width: 100%;
+      background: currentColor;
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+    .skiper-link-001:hover::before {
+      transform-origin: left;
+      transform: scaleX(1);
+    }
+    .skiper-link-001 svg.arrow-diag {
+      margin-left: 0.35em;
+      width: 0.65em;
+      height: 0.65em;
+      transform: translate3d(0, 4px, 0);
+      opacity: 0;
+      transition: transform 0.25s var(--ease-out-expo), opacity 0.25s ease;
+    }
+    .skiper-link-001:hover svg.arrow-diag {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+
+    .skiper-link-004 {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.65rem;
+      overflow: hidden;
+    }
+    .skiper-link-004::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0;
+      background: #ffffff;
+      mix-blend-mode: difference;
+      transition: height 0.28s var(--ease-out-expo);
+      z-index: 1;
+    }
+    .skiper-link-004:hover::before {
+      height: 100%;
+    }
+    .skiper-link-004 svg.arrow-diag {
+      margin-left: 0.45em;
+      width: 0.65em;
+      height: 0.65em;
+      transform: translate3d(0, 4px, 0);
+      opacity: 0;
+      transition: transform 0.28s var(--ease-out-expo), opacity 0.28s ease;
+    }
+    .skiper-link-004:hover svg.arrow-diag {
+      transform: translate3d(0, 0, 0) rotate(45deg);
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="selection:bg-ga-violet selection:text-white antialiased">
+
+  <!-- =====================================================================
+       1. VENGEANCE UI — KINETIC TEXT LOADER
+       ===================================================================== -->
+  <div id="kinetic-loader" class="fixed inset-0 z-[100] bg-[#04050a] flex flex-col items-center justify-center px-4">
+    <div class="relative mb-5">
+      <div class="absolute -inset-4 rounded-full bg-gradient-to-r from-ga-violet via-ga-blue to-ga-mint opacity-35 blur-2xl"></div>
+      <img src="logo.jpg" alt="G.A CENTER Logo" class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border border-white/15 shadow-2xl" />
+    </div>
+    <div id="kinetic-text-container" class="font-display font-bold text-2xl sm:text-4xl tracking-widest uppercase ga-gradient-text flex items-center justify-center flex-wrap gap-0.5"></div>
+    <div class="mt-5 w-44 h-1 rounded-full bg-white/10 overflow-hidden">
+      <div id="loader-bar" class="h-full w-0 ga-gradient-bg transition-all duration-700 ease-out"></div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. VENGEANCE UI — SPOTLIGHT NAVBAR
+       ===================================================================== -->
+  <header class="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 pointer-events-none">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 pointer-events-auto">
+      
+      <a href="#inicio" class="flex items-center gap-3 px-3.5 py-2 rounded-full ag-surface hover:border-ga-blue/50 transition group">
+        <img src="logo.jpg" alt="G.A CENTER" class="w-9 h-9 rounded-full object-cover ring-2 ring-ga-violet/50 group-hover:ring-ga-mint transition" />
+        <div class="pr-1">
+          <span class="font-display font-bold text-sm sm:text-base tracking-tight text-white block leading-none">
+            G.A <span class="ga-gradient-text">CENTER</span>
+          </span>
+          <span class="text-[10px] text-slate-400 tracking-widest uppercase block mt-0.5">Web Studio</span>
+        </div>
+      </a>
+
+      <nav id="spotlight-navbar" class="spotlight-nav-wrap hidden lg:flex items-center gap-1 rounded-full border border-white/10 bg-[#080b16]/90 p-1.5 backdrop-blur-xl shadow-2xl">
+        <a href="#inicio" class="nav-spot-link relative z-10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Inicio</a>
+        <a href="#proyectos" class="nav-spot-link relative z-10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Páginas Creadas</a>
+        <a href="#proceso-vivo" class="nav-spot-link relative z-10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">En Acción</a>
+        <a href="#dominios" class="nav-spot-link relative z-10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Dominios</a>
+        <a href="#contacto" class="nav-spot-link relative z-10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">Presupuesto</a>
+        <div id="nav-active-pill" class="absolute top-1.5 bottom-1.5 rounded-full bg-gradient-to-r from-ga-violet/25 via-ga-blue/25 to-ga-mint/25 border border-ga-blue/40 transition-all duration-300 opacity-0 pointer-events-none"></div>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/5493804148332?text=Hola%20G.A%20CENTER!%20Quiero%20consultar%20por%20una%20p%C3%A1gina%20web"
+           target="_blank" rel="noopener noreferrer"
+           class="radial-glow-btn px-4 sm:px-5 py-2.5 text-xs uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-ga-mint animate-pulse"></span>
+          <span>Contactar</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-ga-blue"></i>
+        </a>
+
+        <button id="btn-mobile-menu" aria-label="Abrir menú" class="lg:hidden p-2.5 rounded-full ag-surface text-slate-200 hover:text-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div id="mobile-menu-drawer" class="hidden lg:hidden mt-3 max-w-md mx-auto rounded-3xl ag-surface p-5 pointer-events-auto">
+      <div class="flex flex-col gap-2.5 text-sm font-semibold text-slate-200">
+        <a href="#inicio" class="mobile-nav-link py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between">
+          <span>Inicio</span><i data-lucide="chevron-right" class="w-4 h-4 text-ga-blue"></i>
+        </a>
+        <a href="#proyectos" class="mobile-nav-link py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between">
+          <span>Páginas Creadas</span><i data-lucide="chevron-right" class="w-4 h-4 text-ga-blue"></i>
+        </a>
+        <a href="#proceso-vivo" class="mobile-nav-link py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between">
+          <span>Sistema en Acción</span><i data-lucide="chevron-right" class="w-4 h-4 text-ga-blue"></i>
+        </a>
+        <a href="#dominios" class="mobile-nav-link py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between">
+          <span>Con Dominio vs. Sin Dominio</span><i data-lucide="chevron-right" class="w-4 h-4 text-ga-blue"></i>
+        </a>
+        <a href="#contacto" class="mobile-nav-link py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between">
+          <span>Pedir Presupuesto</span><i data-lucide="chevron-right" class="w-4 h-4 text-ga-blue"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =====================================================================
+         3. NUEVO HERO ASIMÉTRICO ESPACIAL + HERO GRID INTERACTIVO (index (3).tsx)
+         ===================================================================== -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
+      
+      <!-- VengeanceUI: Wave Grid Background Canvas -->
+      <canvas id="wave-grid-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+      <!-- Iluminación ambiental G.A CENTER -->
+      <div class="absolute top-20 left-10 w-[420px] h-[320px] bg-ga-violet/20 blur-[140px] rounded-full pointer-events-none"></div>
+      <div class="absolute bottom-10 right-10 w-[440px] h-[340px] bg-ga-mint/15 blur-[140px] rounded-full pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Columna Izquierda: Identidad G.A CENTER + Propuesta de Valor Nítida -->
+          <div class="lg:col-span-6 space-y-6 text-left">
+            
+            <!-- Badge superior con Logo y Estado -->
+            <div class="inline-flex items-center gap-3 p-1.5 pr-4 rounded-full bg-[#090d1a]/90 border border-white/10 shadow-xl">
+              <img src="logo.jpg" alt="G.A CENTER" class="w-8 h-8 rounded-full object-cover border border-ga-violet/50" />
+              <span class="w-2 h-2 rounded-full bg-ga-mint animate-pulse"></span>
+              <span class="text-xs font-bold tracking-wider uppercase text-slate-200">
+                G.A CENTER • Desarrollo Web a Medida
+              </span>
+            </div>
+
+            <!-- Título completamente rediseñado: tipografía limpia, afilada y sin deformación -->
+            <h1 class="font-display font-bold text-4xl sm:text-5xl xl:text-6xl tracking-tight text-white leading-[1.06]">
+              Diseñamos sitios web que hacen crecer
+              <span class="block mt-2">
+                <span id="hero-dynamic-phrase" class="hero-morph-word ga-gradient-text">
+                  tu marca en internet.
+                </span>
+              </span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+              Desarrollamos páginas rápidas, modernas y listas para recibir clientes por WhatsApp. Elegí entre un <strong class="text-white">plan con enlace gratuito (sin dominio)</strong> o tu propio dominio <strong class="text-ga-mint">.com / .com.ar</strong>.
+            </p>
+
+            <!-- Chips rápidos de lo que incluye -->
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-xs font-semibold text-slate-200 flex items-center gap-1.5">
+                <i data-lucide="globe" class="w-3.5 h-3.5 text-ga-blue"></i> Con o Sin Dominio
+              </span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-xs font-semibold text-slate-200 flex items-center gap-1.5">
+                <i data-lucide="smartphone" class="w-3.5 h-3.5 text-ga-mint"></i> 100% Adaptada a Celular
+              </span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-xs font-semibold text-slate-200 flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-3.5 h-3.5 text-ga-violet"></i> Integración con WhatsApp
+              </span>
+            </div>
+
+            <!-- Acciones principales -->
+            <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <a href="#proyectos" class="radial-glow-btn px-7 py-4 text-sm">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-ga-blue"></i>
+                <span>Explorar Trabajos Reales</span>
+              </a>
+
+              <a href="#contacto" class="px-6 py-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-sm font-bold text-white transition flex items-center justify-center gap-2">
+                <span>Armar mi Presupuesto</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-ga-mint"></i>
+              </a>
+            </div>
+
+            <!-- Social Flip Buttons (WhatsApp + Instagram) -->
+            <div class="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
+              <a href="https://wa.me/5493804148332?text=Hola%20G.A%20CENTER!%20Me%20interesa%20hacer%20una%20p%C3%A1gina%20web"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-flip-btn w-52">
+                <div class="social-flip-inner">
+                  <div class="social-flip-front">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                    <span>WhatsApp Directo</span>
+                  </div>
+                  <div class="social-flip-back whatsapp">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Iniciar Chat Ahora</span>
+                  </div>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/g.a.center/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="social-flip-btn w-48">
+                <div class="social-flip-inner">
+                  <div class="social-flip-front">
+                    <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i>
+                    <span>@g.a.center</span>
+                  </div>
+                  <div class="social-flip-back instagram">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    <span>Abrir Instagram</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Columna Derecha: HERO GRID INTERACTIVO (Adaptado de index (3).tsx) -->
+          <div class="lg:col-span-6">
+            <div class="grid grid-cols-12 gap-3 sm:gap-3.5" aria-label="Panel interactivo de diseño y métricas G.A CENTER">
+
+              <!-- TILE 1: Drafting Surface (index (3).tsx) -->
+              <figure class="col-span-12 rounded-3xl ag-surface p-4 sm:p-5 relative overflow-hidden min-h-[255px] border border-white/10">
+                <!-- Fila superior: Segmented Control + Toggle + Gap Stepper -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-3.5 border-b border-white/10">
+                  <div class="inline-flex rounded-xl bg-[#05070e] p-1 border border-white/10 text-xs font-bold">
+                    <span id="hg-seg-0" class="px-3 py-1 rounded-lg transition-colors bg-ga-violet/25 text-white">Diseño</span>
+                    <span id="hg-seg-1" class="px-3 py-1 rounded-lg transition-colors text-slate-400">Código</span>
+                    <span id="hg-seg-2" class="px-3 py-1 rounded-lg transition-colors text-slate-400">Online</span>
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <!-- Toggle Switch -->
+                    <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+                      <span>SSL</span>
+                      <span class="w-9 h-5 rounded-full bg-ga-mint/25 border border-ga-mint/50 flex items-center px-0.5 justify-end">
+                        <span class="w-3.5 h-3.5 rounded-full bg-ga-mint"></span>
+                      </span>
+                    </div>
+
+                    <!-- Gap Stepper -->
+                    <div class="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-[#05070e] border border-white/10 text-xs">
+                      <span class="text-slate-400">Grid</span>
+                      <span class="text-slate-500">−</span>
+                      <span id="hg-gap-val" class="font-mono font-bold text-white w-5 text-center">24</span>
+                      <span id="hg-plus-btn" class="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-ga-blue">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cuerpo del Drafting Stage -->
+                <div class="mt-4 grid grid-cols-12 gap-3 items-center">
+                  <!-- Checklist Design / Build / Ship -->
+                  <div class="col-span-5 space-y-2">
+                    <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#05070e] border border-white/5 text-xs text-slate-400">
+                      <i data-lucide="search" class="w-3.5 h-3.5 text-ga-blue"></i>
+                      <span>Componentes...</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-[#05070e]/90 border border-white/10 space-y-1.5 text-xs">
+                      <div class="flex items-center gap-2 text-slate-200">
+                        <span class="w-4 h-4 rounded bg-ga-violet flex items-center justify-center text-[10px] text-white">✓</span>
+                        <span>Diseño UI</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-slate-200">
+                        <span class="w-4 h-4 rounded bg-ga-blue flex items-center justify-center text-[10px] text-slate-950 font-bold">✓</span>
+                        <span>Desarrollo</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-slate-300">
+                        <span id="hg-ship-check" class="w-4 h-4 rounded border border-white/25 flex items-center justify-center text-[10px] text-slate-950 font-bold transition-colors"></span>
+                        <span>Publicar Web</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Frame Seleccionable + Botón Publish -> Live -->
+                  <div class="col-span-7 flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-[11px] font-mono text-slate-400">vista-previa.html</span>
+                      <button type="button" id="hg-publish-btn"
+                              class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-ga-violet to-ga-blue text-white text-xs font-bold flex items-center gap-1.5 shadow-lg transition-all">
+                        <span id="hg-publish-text">Publicar</span>
+                      </button>
+                    </div>
+
+                    <!-- Frame con 4 esquinas (hg-design-frame de index (3).tsx) -->
+                    <div id="hg-frame" data-selected="false" class="hg-frame-box relative rounded-xl p-3.5 min-h-[92px] flex flex-col justify-between">
+                      <span class="w-2 h-2 bg-ga-blue absolute -top-1 -left-1 rounded-xs"></span>
+                      <span class="w-2 h-2 bg-ga-blue absolute -top-1 -right-1 rounded-xs"></span>
+                      <span class="w-2 h-2 bg-ga-blue absolute -bottom-1 -left-1 rounded-xs"></span>
+                      <span class="w-2 h-2 bg-ga-blue absolute -bottom-1 -right-1 rounded-xs"></span>
+
+                      <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-white">Layout Principal</span>
+                        <span id="hg-frame-size" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-ga-blue/20 text-ga-blue">1280 × 720</span>
+                      </div>
+                      <div class="grid grid-cols-3 gap-1.5 mt-2">
+                        <span class="h-4 rounded bg-white/10"></span>
+                        <span class="h-4 rounded bg-ga-violet/30"></span>
+                        <span class="h-4 rounded bg-ga-mint/30"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cursor automatizado de Drafting Stage -->
+                <div id="hg-cursor" class="hg-cursor absolute top-0 left-0 z-30 flex items-center gap-1" style="transform: translate3d(260px, 160px, 0);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#38bdf8" stroke="#04050a" stroke-width="1.5">
+                    <path d="M4 3l16 7-7 2-2 7-7-16z" />
+                  </svg>
+                  <span class="px-1.5 py-0.5 rounded bg-ga-blue text-[#04050a] text-[9px] font-extrabold uppercase">G.A Studio</span>
+                </div>
+              </figure>
+
+              <!-- TILE 2: Revenue / Rendimiento on Glass (index (3).tsx) -->
+              <figure class="col-span-12 sm:col-span-7 rounded-3xl ag-surface p-4 border border-white/10 flex flex-col justify-between">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-white/25"></span>
+                    <span class="ml-1.5 text-[11px] font-mono text-slate-400">gacenter.studio</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">+185% Visitas</span>
+                </div>
+
+                <div class="my-3">
+                  <div class="flex items-baseline justify-between">
+                    <strong class="font-display text-2xl text-white">Conversión Web</strong>
+                    <span class="text-xs text-ga-mint font-semibold">● Activo 24/7</span>
+                  </div>
+                  <svg viewBox="0 0 300 84" class="w-full h-16 mt-2 overflow-visible" aria-label="Curva de crecimiento">
+                    <defs>
+                      <linearGradient id="hg-chart-grad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#8b5cf6" />
+                        <stop offset="50%" stop-color="#38bdf8" />
+                        <stop offset="100%" stop-color="#2dd4bf" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M4 76C18 76 26 60 40 62S62 74 78 52 100 60 117 40 143 53 160 30 184 46 203 20 229 33 249 16 276 26 296 8"
+                          fill="none" stroke="url(#hg-chart-grad)" stroke-width="3" stroke-linecap="round" />
+                    <circle cx="296" cy="8" r="4.5" fill="#2dd4bf" />
+                  </svg>
+                </div>
+              </figure>
+
+              <!-- TILE 3: Tactile Keyboard Detail (Keys de index (3).tsx) -->
+              <figure class="col-span-6 sm:col-span-5 rounded-3xl ag-surface p-3.5 border border-white/10 flex flex-col justify-between overflow-hidden">
+                <div class="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1.5">
+                  <span>Código Limpio</span>
+                  <span class="text-ga-blue font-mono">HTML/JS</span>
+                </div>
+                <div class="space-y-1.5 select-none" id="hg-key-grid">
+                  <div class="grid grid-cols-5 gap-1.5">
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">Q</small><span class="text-[10px] font-bold text-white">UI</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center active-key"><small class="text-[8px] text-white/80">W</small><span class="text-[10px] font-bold text-white">WEB</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">E</small><span class="text-[10px] font-bold text-white">SEO</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">R</small><span class="text-[10px] font-bold text-white">APP</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">T</small><span class="text-[10px] font-bold text-white">SSL</span></span>
+                  </div>
+                  <div class="grid grid-cols-5 gap-1.5">
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">A</small><span class="text-[10px] font-bold text-white">CSS</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">S</small><span class="text-[10px] font-bold text-white">DOM</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">D</small><span class="text-[10px] font-bold text-white">API</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">F</small><span class="text-[10px] font-bold text-white">UX</span></span>
+                    <span class="hg-keycap p-1.5 flex flex-col items-center"><small class="text-[8px] text-slate-400">G</small><span class="text-[10px] font-bold text-white">GA</span></span>
+                  </div>
+                </div>
+              </figure>
+
+              <!-- TILE 4: App Icon Collection + Player Status (Icons & Player de index (3).tsx) -->
+              <figure class="col-span-6 sm:col-span-12 rounded-3xl ag-surface p-3.5 sm:px-5 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+                  <span class="w-9 h-9 rounded-xl bg-[#0a7cff] flex items-center justify-center text-white shadow"><i data-lucide="message-square" class="w-4 h-4"></i></span>
+                  <span class="w-9 h-9 rounded-xl bg-white text-slate-900 flex flex-col items-center justify-center font-display font-black text-[10px] leading-none shadow"><small class="text-[7px] text-rose-500">TURNO</small>24</span>
+                  <span class="w-9 h-9 rounded-xl bg-[#ff9500] flex items-center justify-center text-white shadow"><i data-lucide="zap" class="w-4 h-4"></i></span>
+                  <span class="w-9 h-9 rounded-xl bg-[#2fc455] flex items-center justify-center text-white shadow"><i data-lucide="map-pin" class="w-4 h-4"></i></span>
+                  <span class="w-9 h-9 rounded-xl bg-[#7a5cff] flex items-center justify-center text-white shadow"><i data-lucide="shopping-bag" class="w-4 h-4"></i></span>
+                  <span class="w-9 h-9 rounded-xl bg-[#2bb3f0] flex items-center justify-center text-white shadow"><i data-lucide="camera" class="w-4 h-4"></i></span>
+                </div>
+
+                <!-- Mini Player Status de index (3).tsx -->
+                <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-white/10">
+                  <div class="text-left sm:text-right">
+                    <strong class="text-xs text-white block">Velocidad de Carga</strong>
+                    <span class="text-[10px] text-ga-mint font-mono">99/100 Google PageSpeed</span>
+                  </div>
+                  <div class="w-9 h-9 rounded-xl ga-gradient-bg flex items-center justify-center text-white shadow">
+                    <i data-lucide="check" class="w-5 h-5"></i>
+                  </div>
+                </div>
+              </figure>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. SKIPER 16 — STICKY CARD STACK (Las 3 Páginas Reales que ya hiciste)
+         ===================================================================== -->
+    <section id="proyectos" class="relative pt-20 pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ga-violet/10 border border-ga-violet/30 text-xs font-bold uppercase tracking-widest text-ga-blue mb-4">
+          <i data-lucide="award" class="w-3.5 h-3.5"></i>
+          <span>Portafolio Real G.A CENTER</span>
+        </div>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+          Páginas web que ya hicimos y están <span class="ga-gradient-text">online ahora mismo</span>
+        </h2>
+        <p class="mt-4 text-slate-400 text-base sm:text-lg">
+          Mirá cómo funcionan nuestros desarrollos reales. Podés abrir la <strong class="text-white">Vista Interactiva en Vivo</strong> directamente en cada tarjeta o visitarlas en pantalla completa.
+        </p>
+      </div>
+
+      <!-- Sticky Stack (Skiper 16) -->
+      <div id="skiper16-stack" class="relative flex flex-col gap-16 pb-8">
+
+        <!-- PROYECTO 1: A.G AUTOMOTORES -->
+        <div class="skiper16-card-wrapper sticky top-24 flex items-center justify-center" data-card-index="0">
+          <article class="skiper16-card w-full rounded-4xl ag-surface border border-white/15 overflow-hidden origin-top transition-transform duration-150">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-[#060811] border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400 truncate max-w-[200px] sm:max-w-md">
+                  https://agautomotores.github.io/A.GAUTOMOTORES/
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button"
+                        onclick="toggleLivePreview('iframe-ag', this)"
+                        class="px-3 py-1 rounded-full bg-ga-blue/15 hover:bg-ga-blue/25 border border-ga-blue/40 text-ga-blue text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span>Vista Interactiva en Vivo</span>
+                </button>
+                <a href="https://agautomotores.github.io/A.GAUTOMOTORES/" target="_blank" rel="noopener noreferrer"
+                   class="skiper-link-001 text-xs font-bold text-ga-mint">
+                  <span>Abrir Sitio</span>
+                  <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-[#0b1020] to-[#070a14]">
+                <div>
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                    <i data-lucide="car" class="w-3.5 h-3.5"></i>
+                    <span>Concesionaria &amp; Catálogo de Vehículos</span>
+                  </div>
+                  <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">A.G Automotores</h3>
+                  <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                    Catálogo automotor digital con galería de vehículos disponibles, estado de stock, detalles técnicos y botón de consulta inmediata por WhatsApp para cada unidad.
+                  </p>
+                  <ul class="mt-5 space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Fichas de vehículos con múltiples fotos</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Diseño rápido adaptable a celulares y PC</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Consultas directas al vendedor en 1 toque</span></li>
+                  </ul>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <a href="https://agautomotores.github.io/A.GAUTOMOTORES/" target="_blank" rel="noopener noreferrer"
+                     class="skiper-link-004 text-sm font-bold text-white rounded-lg border border-white/15">
+                    <span>Visitar A.G Automotores</span>
+                    <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="lg:col-span-7 relative min-h-[340px] sm:min-h-[390px] bg-[#05070e] overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="p-5 sm:p-6 h-full flex flex-col justify-between bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.22),transparent_60%)]">
+                  <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-display font-black text-xs text-white">AG</div>
+                      <div>
+                        <span class="text-xs font-extrabold tracking-wider text-white block">A.G AUTOMOTORES</span>
+                        <span class="text-[10px] text-blue-400">Catálogo Oficial de Vehículos</span>
+                      </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">● En Vivo</span>
+                  </div>
+
+                  <div class="my-4 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div class="rounded-2xl bg-[#0d1324] border border-white/10 p-3.5">
+                      <div class="h-28 rounded-xl bg-gradient-to-br from-slate-800 via-blue-950 to-slate-900 relative flex items-center justify-center">
+                        <i data-lucide="car-front" class="w-12 h-12 text-blue-400/75"></i>
+                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-blue-600 text-[9px] font-bold text-white uppercase">Destacado</span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="text-[10px] uppercase tracking-wider text-blue-400 font-bold">Stock Seleccionado</span>
+                        <h4 class="text-sm font-bold text-white">Exhibición de Unidades</h4>
+                      </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-[#0d1324] border border-white/10 p-3.5">
+                      <div class="h-28 rounded-xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-800 relative flex items-center justify-center">
+                        <i data-lucide="gauge" class="w-12 h-12 text-cyan-400/75"></i>
+                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-emerald-600 text-[9px] font-bold text-white uppercase">Disponible</span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="text-[10px] uppercase tracking-wider text-cyan-400 font-bold">Ficha Técnica</span>
+                        <h4 class="text-sm font-bold text-white">Galería + Contacto Directo</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-[11px] text-slate-400 bg-black/40 px-4 py-2.5 rounded-xl border border-white/5">
+                    <span>agautomotores.github.io/A.GAUTOMOTORES/</span>
+                    <span class="text-ga-mint font-semibold">Desarrollado por G.A CENTER</span>
+                  </div>
+                </div>
+
+                <iframe id="iframe-ag"
+                        data-src="https://agautomotores.github.io/A.GAUTOMOTORES/"
+                        title="Vista en vivo A.G Automotores"
+                        class="hidden absolute inset-0 w-full h-full bg-black border-0 z-20"></iframe>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- PROYECTO 2: TURNOS TALLER ANGELELLI -->
+        <div class="skiper16-card-wrapper sticky top-28 flex items-center justify-center" data-card-index="1">
+          <article class="skiper16-card w-full rounded-4xl ag-surface border border-white/15 overflow-hidden origin-top transition-transform duration-150">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-[#060811] border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400 truncate max-w-[200px] sm:max-w-md">
+                  https://agautomotores.github.io/TurnosTallerAngelelli/
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button"
+                        onclick="toggleLivePreview('iframe-angelelli', this)"
+                        class="px-3 py-1 rounded-full bg-ga-blue/15 hover:bg-ga-blue/25 border border-ga-blue/40 text-ga-blue text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span>Vista Interactiva en Vivo</span>
+                </button>
+                <a href="https://agautomotores.github.io/TurnosTallerAngelelli/" target="_blank" rel="noopener noreferrer"
+                   class="skiper-link-001 text-xs font-bold text-ga-mint">
+                  <span>Abrir Sitio</span>
+                  <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-[#0b1020] to-[#070a14]">
+                <div>
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/15 border border-red-400/30 text-red-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                    <i data-lucide="calendar-clock" class="w-3.5 h-3.5"></i>
+                    <span>Sistema de Turnos &amp; Gestión</span>
+                  </div>
+                  <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">Turnos Taller Angelelli</h3>
+                  <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                    Sistema web para reserva de turnos mecánicos, seguimiento de mantenimientos por patente y base de datos sincronizada en la nube.
+                  </p>
+                  <ul class="mt-5 space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Organización de agenda y recepción 24/7</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Historial por vehículo e impresión de fichas</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Sincronización en tiempo real en la nube</span></li>
+                  </ul>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <a href="https://agautomotores.github.io/TurnosTallerAngelelli/" target="_blank" rel="noopener noreferrer"
+                     class="skiper-link-004 text-sm font-bold text-white rounded-lg border border-white/15">
+                    <span>Visitar Taller Angelelli</span>
+                    <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="lg:col-span-7 relative min-h-[340px] sm:min-h-[390px] bg-[#07090e] overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="p-5 sm:p-6 h-full flex flex-col justify-between bg-[radial-gradient(circle_at_top_right,rgba(255,42,42,0.18),transparent_60%)]">
+                  <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <div class="flex items-center gap-3">
+                      <img src="taller-logo.jpg" alt="Taller Angelelli" class="w-9 h-9 rounded-full object-cover border border-red-500/50" />
+                      <div>
+                        <span class="font-display font-bold text-sm text-white block leading-none">
+                          TALLER <span class="text-[#ff2a2a]">ANGELELLI</span>
+                        </span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest">Turnos &amp; Gestión</span>
+                      </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 text-[10px] font-bold border border-red-500/30">⚡ Online</span>
+                  </div>
+
+                  <div class="my-4 space-y-3">
+                    <div class="p-4 rounded-2xl bg-[#0f131c] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div>
+                        <span class="text-[10px] uppercase tracking-widest text-red-400 font-bold">Sistema en la Nube</span>
+                        <h4 class="font-display font-bold text-base text-white mt-0.5">Reserva de Turnos y Fichas Técnicas</h4>
+                      </div>
+                      <div class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#e60000] to-[#ff2a2a] text-white text-xs font-extrabold uppercase tracking-wider shrink-0 text-center">
+                        + Solicitar Turno
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3">
+                      <div class="p-3 rounded-xl bg-[#0a0d14] border border-white/5 text-center">
+                        <span class="font-display font-black text-lg text-white block">100%</span>
+                        <span class="text-[10px] text-slate-400 uppercase">Digital</span>
+                      </div>
+                      <div class="p-3 rounded-xl bg-[#0a0d14] border border-white/5 text-center">
+                        <span class="font-display font-black text-lg text-[#ff2a2a] block">24/7</span>
+                        <span class="text-[10px] text-slate-400 uppercase">Turnos</span>
+                      </div>
+                      <div class="p-3 rounded-xl bg-[#0a0d14] border border-white/5 text-center">
+                        <span class="font-display font-black text-lg text-emerald-400 block">Cloud</span>
+                        <span class="text-[10px] text-slate-400 uppercase">Activo</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-[11px] text-slate-400 bg-black/40 px-4 py-2.5 rounded-xl border border-white/5">
+                    <span>agautomotores.github.io/TurnosTallerAngelelli/</span>
+                    <span class="text-ga-mint font-semibold">Desarrollado por G.A CENTER</span>
+                  </div>
+                </div>
+
+                <iframe id="iframe-angelelli"
+                        data-src="https://agautomotores.github.io/TurnosTallerAngelelli/"
+                        title="Vista en vivo Turnos Taller Angelelli"
+                        class="hidden absolute inset-0 w-full h-full bg-black border-0 z-20"></iframe>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- PROYECTO 3: N&G IMPORTADOS -->
+        <div class="skiper16-card-wrapper sticky top-32 flex items-center justify-center" data-card-index="2">
+          <article class="skiper16-card w-full rounded-4xl ag-surface border border-white/15 overflow-hidden origin-top transition-transform duration-150">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-[#060811] border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400 truncate max-w-[200px] sm:max-w-md">
+                  https://gacenter.github.io/NYGIMPORTADOS-2/
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <button type="button"
+                        onclick="toggleLivePreview('iframe-nyg', this)"
+                        class="px-3 py-1 rounded-full bg-ga-blue/15 hover:bg-ga-blue/25 border border-ga-blue/40 text-ga-blue text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span>Vista Interactiva en Vivo</span>
+                </button>
+                <a href="https://gacenter.github.io/NYGIMPORTADOS-2/" target="_blank" rel="noopener noreferrer"
+                   class="skiper-link-001 text-xs font-bold text-ga-mint">
+                  <span>Abrir Sitio</span>
+                  <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-[#0b1020] to-[#070a14]">
+                <div>
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                    <span>Tienda &amp; Catálogo con Carrito</span>
+                  </div>
+                  <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">N&amp;G Importados</h3>
+                  <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                    Catálogo online con filtros por categoría, buscador de productos en tiempo real y carrito de compras que envía el pedido detallado al WhatsApp del negocio.
+                  </p>
+                  <ul class="mt-5 space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Carrito interactivo con totalizador automático</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Filtros por rubro y buscador instantáneo</span></li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-ga-mint shrink-0"></i><span>Diseño editorial de alta conversión</span></li>
+                  </ul>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <a href="https://gacenter.github.io/NYGIMPORTADOS-2/" target="_blank" rel="noopener noreferrer"
+                     class="skiper-link-004 text-sm font-bold text-white rounded-lg border border-white/15">
+                    <span>Visitar N&amp;G Importados</span>
+                    <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="lg:col-span-7 relative min-h-[340px] sm:min-h-[390px] bg-[#faf9f6] text-[#1b1b1c] overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="p-5 sm:p-6 h-full flex flex-col justify-between bg-gradient-to-b from-[#faf9f6] to-[#f4f1ea]">
+                  <div class="flex items-center justify-between border-b border-[#b59a72]/30 pb-3">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-full bg-[#b59a72]/20 border border-[#b59a72] flex items-center justify-center text-[#9c815b] font-serif font-bold text-xs">N&amp;G</div>
+                      <div>
+                        <span class="font-serif font-bold text-sm text-[#1b1b1c] block leading-none">N&amp;G <span class="italic text-[#b59a72]">Importados</span></span>
+                        <span class="text-[9px] uppercase tracking-widest text-neutral-500">Boutique • Catálogo Online</span>
+                      </div>
+                    </div>
+                    <span class="px-3 py-1 rounded-xl bg-[#1b1b1c] text-white text-[10px] font-bold flex items-center gap-1.5">
+                      <span>🛍️ Mi Pedido</span>
+                      <span class="px-1.5 py-0.2 rounded-full bg-[#b59a72] text-white">3</span>
+                    </span>
+                  </div>
+
+                  <div class="my-4 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div class="p-3.5 rounded-2xl bg-white border border-[#b59a72]/30 shadow-sm">
+                      <span class="text-[9px] uppercase tracking-widest text-[#b59a72] font-bold">Colección Exclusiva</span>
+                      <h4 class="font-serif font-bold text-base text-[#1b1b1c] mt-1">El arte de la distinción en cada detalle</h4>
+                      <div class="mt-3 inline-block px-3 py-1.5 rounded-lg bg-[#b59a72] text-white text-[10px] font-bold uppercase tracking-wider">
+                        Explorar Catálogo
+                      </div>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-white border border-[#b59a72]/30 shadow-sm flex flex-col justify-between">
+                      <div class="my-1 space-y-1.5">
+                        <div class="flex items-center justify-between text-xs border-b border-neutral-100 pb-1">
+                          <span class="font-semibold">Perfumería Árabe</span>
+                          <span class="text-[#b59a72] font-bold">+ Agregar</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs border-b border-neutral-100 pb-1">
+                          <span class="font-semibold">Vapers &amp; Esencias</span>
+                          <span class="text-[#b59a72] font-bold">+ Agregar</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                          <span class="font-semibold">Tecnología Selecta</span>
+                          <span class="text-[#b59a72] font-bold">+ Agregar</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-[11px] text-neutral-600 bg-white/90 px-4 py-2.5 rounded-xl border border-[#b59a72]/25">
+                    <span>gacenter.github.io/NYGIMPORTADOS-2/</span>
+                    <span class="text-[#9c815b] font-bold">Desarrollado por G.A CENTER</span>
+                  </div>
+                </div>
+
+                <iframe id="iframe-nyg"
+                        data-src="https://gacenter.github.io/NYGIMPORTADOS-2/"
+                        title="Vista en vivo N&G Importados"
+                        class="hidden absolute inset-0 w-full h-full bg-white border-0 z-20"></iframe>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. HERO DEMO (HeroDemo.tsx) + DARK HERO DEPLOYMENTS (index (2).tsx)
+         ===================================================================== -->
+    <section id="proceso-vivo" class="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-[#050812]">
+      <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ga-blue/10 border border-ga-blue/30 text-xs font-bold uppercase tracking-widest text-ga-blue mb-4">
+            <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+            <span>Ingeniería de Diseño &amp; Publicación</span>
+          </div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+            De tu idea a una <span class="ga-gradient-text">web publicada en vivo</span>
+          </h2>
+          <p class="mt-4 text-slate-400 text-base sm:text-lg">
+            Cuidamos cada botón, cada animación y el despliegue final para que tu negocio tenga presencia inmediata.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- ESCENARIO A: HeroDemo.tsx (Inspector Visual + Anotaciones + Terminal) -->
+          <div class="lg:col-span-6 rounded-3xl ag-surface border border-white/15 overflow-hidden flex flex-col justify-between relative min-h-[390px]">
+            <!-- Barra de Ventana -->
+            <div class="flex items-center justify-between px-4 py-3 bg-[#070a14] border-b border-white/10">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400">diseño.gacenter.studio</span>
+              </div>
+              <span class="text-[11px] font-semibold text-ga-violet">1. Diseño Personalizado</span>
+            </div>
+
+            <!-- Contenido del Dashboard anotado (HeroDemo) -->
+            <div class="p-5 flex-1 relative flex gap-4">
+              <!-- Sidebar con íconos y área de selección -->
+              <aside class="w-12 rounded-2xl bg-[#060811] border border-white/10 p-2 flex flex-col items-center justify-between relative">
+                <span class="w-6 h-6 rounded-lg ga-gradient-bg block"></span>
+                <div id="hd-icons-area" class="space-y-2.5 py-2 px-1 rounded-xl border border-dashed border-emerald-400/60 bg-emerald-500/10 relative">
+                  <span class="w-5 h-5 rounded bg-white/20 block"></span>
+                  <span class="w-5 h-5 rounded bg-ga-blue/60 block"></span>
+                  <span class="w-5 h-5 rounded bg-white/20 block"></span>
+                  <!-- Marcador #2 Verde -->
+                  <span class="absolute -right-2.5 -top-2 w-5 h-5 rounded-full bg-emerald-500 text-[#04050a] font-bold text-[10px] flex items-center justify-center shadow">2</span>
+                </div>
+                <span class="w-5 h-5 rounded-full bg-white/15 block"></span>
+              </aside>
+
+              <!-- Panel Principal del Mockup -->
+              <div class="flex-1 flex flex-col justify-between relative">
+                <div class="flex items-center justify-between gap-2 pb-3 border-b border-white/10">
+                  <div class="relative inline-flex items-center gap-2">
+                    <span class="font-display font-bold text-sm text-white px-2 py-0.5 rounded bg-amber-500/15 border border-amber-400/40">
+                      Panel de Tu Negocio
+                    </span>
+                    <span class="w-5 h-5 rounded-full bg-amber-400 text-[#04050a] font-bold text-[10px] flex items-center justify-center shadow">3</span>
+                  </div>
+
+                  <div class="relative">
+                    <span class="px-3 py-1.5 rounded-lg bg-ga-blue/20 border border-ga-blue text-ga-blue text-xs font-bold block">
+                      Botón WhatsApp
+                    </span>
+                    <span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-ga-blue text-[#04050a] font-bold text-[10px] flex items-center justify-center shadow">1</span>
+                  </div>
+                </div>
+
+                <!-- Tarjetas de métricas simuladas -->
+                <div class="grid grid-cols-3 gap-2.5 my-3">
+                  <div class="p-2.5 rounded-xl bg-[#060811] border border-white/10">
+                    <span class="block w-10 h-1.5 rounded bg-slate-600 mb-2"></span>
+                    <span class="block w-14 h-4 rounded bg-ga-violet/40"></span>
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-[#060811] border border-white/10">
+                    <span class="block w-12 h-1.5 rounded bg-slate-600 mb-2"></span>
+                    <span class="block w-16 h-4 rounded bg-ga-blue/40"></span>
+                  </div>
+                  <div class="p-2.5 rounded-xl bg-[#060811] border border-white/10">
+                    <span class="block w-8 h-1.5 rounded bg-slate-600 mb-2"></span>
+                    <span class="block w-12 h-4 rounded bg-ga-mint/40"></span>
+                  </div>
+                </div>
+
+                <!-- Ventana de Terminal / Especificaciones Superpuesta (HeroDemo Terminal) -->
+                <div class="rounded-2xl bg-[#04060c]/95 border border-ga-violet/40 p-3.5 shadow-2xl font-mono text-xs">
+                  <div class="flex items-center justify-between text-[10px] text-slate-400 pb-2 mb-2 border-b border-white/10">
+                    <span class="text-ga-mint font-bold">● G.A Studio Builder</span>
+                    <span id="hd-status-pill" class="px-2 py-0.5 rounded bg-ga-violet/20 text-ga-violet">Aplicando mejoras...</span>
+                  </div>
+                  <div id="hd-terminal-lines" class="space-y-1 text-[11px] text-slate-200 min-h-[64px]">
+                    <p class="text-ga-blue">1. Botón WhatsApp: conexión directa activa</p>
+                    <p class="text-emerald-400">2. Navegación móvil: fluida y adaptable</p>
+                    <p class="text-amber-300">3. Identidad visual: colores de tu marca</p>
+                  </div>
+                </div>
+
+                <!-- Toolbar Flotante inferior (HeroDemo Toolbar) -->
+                <div class="mt-3 flex items-center justify-between px-3.5 py-2 rounded-full bg-[#070a14] border border-white/15">
+                  <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+                    <i data-lucide="wand-2" class="w-4 h-4 text-ga-violet"></i>
+                    <span>Personalización 100% a tu gusto</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">✓ Listo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ESCENARIO B: DarkHero Deployments (index (2).tsx) -->
+          <div class="lg:col-span-6 rounded-3xl ag-surface border border-white/15 overflow-hidden flex flex-col justify-between min-h-[390px]">
+            <!-- Barra de Ventana -->
+            <div class="flex items-center justify-between px-4 py-3 bg-[#070a14] border-b border-white/10">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400">cloud.gacenter.studio/deployments</span>
+              </div>
+              <span class="text-[11px] font-semibold text-ga-mint">2. Publicación Instantánea</span>
+            </div>
+
+            <!-- Cuerpo de Deployments (index (2).tsx) -->
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-3.5 border-b border-white/10">
+                <span class="font-display font-bold text-base text-white">Despliegues en Producción</span>
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
+                  <span class="w-2.5 h-2.5 rounded-xs bg-ga-mint"></span>
+                  tu-pagina-web
+                </span>
+              </div>
+
+              <div class="my-3 space-y-2.5 flex-1 flex flex-col justify-center">
+                <!-- Fila animada que se despliega en bucle (Collapse de index (2).tsx) -->
+                <div id="dh-live-row" class="dh-collapse is-open">
+                  <div class="p-3.5 rounded-2xl bg-[#0d1326] border border-ga-mint/40 flex items-center justify-between gap-3">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="text-xs sm:text-sm font-bold text-white">Publicación Web + Catálogo WhatsApp</span>
+                        <span id="dh-current-badge" class="px-2 py-0.5 rounded-full bg-ga-mint/20 text-ga-mint text-[10px] font-bold">Actual</span>
+                      </div>
+                      <div class="flex items-center gap-3 mt-1 text-[11px] font-mono text-slate-400">
+                        <span class="flex items-center gap-1"><i data-lucide="git-branch" class="w-3 h-3"></i>main</span>
+                        <span class="flex items-center gap-1"><i data-lucide="git-commit-horizontal" class="w-3 h-3"></i>a41c9e2</span>
+                        <span>Ahora mismo</span>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 shrink-0">
+                      <span id="dh-status-badge" class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-all">
+                        <span id="dh-status-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span id="dh-status-word">Online</span>
+                      </span>
+                      <span id="dh-timer" class="text-xs font-mono text-slate-400 w-8 text-right">38s</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Filas anteriores -->
+                <div class="p-3 rounded-2xl bg-[#060913] border border-white/5 flex items-center justify-between gap-3 opacity-85">
+                  <div>
+                    <div class="text-xs font-semibold text-slate-200">Configuración de Diseño Mobile &amp; SSL</div>
+                    <div class="flex items-center gap-3 mt-1 text-[11px] font-mono text-slate-500">
+                      <span>main • 7d02b18</span>
+                      <span>Hace 2h</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-[11px] font-semibold">● Ready</span>
+                    <span class="text-xs font-mono text-slate-500 w-8 text-right">41s</span>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-[#060913] border border-white/5 flex items-center justify-between gap-3 opacity-60">
+                  <div>
+                    <div class="text-xs font-semibold text-slate-300">Optimización de Imágenes y Velocidad</div>
+                    <div class="text-[11px] font-mono text-slate-500 mt-0.5">main • 3f91c04</div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-400 text-[11px] font-semibold">● Ready</span>
+                    <span class="text-xs font-mono text-slate-500 w-8 text-right">29s</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                <span>Servidor de alta disponibilidad 24/7</span>
+                <span class="text-ga-mint font-semibold">Certificado HTTPS incluido</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. COMPARATIVA CLARA: ¿CON DOMINIO O SIN DOMINIO?
+         ===================================================================== -->
+    <section id="dominios" class="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-[#060913]/90">
+      <div class="max-w-6xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ga-mint/10 border border-ga-mint/30 text-xs font-bold uppercase tracking-widest text-ga-mint mb-4">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            <span>Dos Modalidades a Elección</span>
+          </div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+            Páginas web <span class="ga-gradient-text">Con Dominio o Sin Dominio</span>
+          </h2>
+          <p class="mt-4 text-slate-400 text-base sm:text-lg">
+            Adaptamos el proyecto a la etapa en la que esté tu negocio:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+          <!-- OPCIÓN 1: SIN DOMINIO -->
+          <div class="rounded-4xl ag-surface ag-float-card p-7 sm:p-10 border border-ga-blue/30 flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <span class="px-3.5 py-1.5 rounded-full bg-ga-blue/15 border border-ga-blue/30 text-ga-blue text-xs font-bold uppercase tracking-wider">
+                  Sin Gastos Fijos Anuales
+                </span>
+                <span class="text-xs font-semibold text-emerald-400">★ Enlace Gratuito</span>
+              </div>
+
+              <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                Web Sin Dominio Propio
+              </h3>
+              <p class="mt-2 text-sm text-slate-300">
+                Tu página queda publicada en internet con un enlace gratuito listo para compartir en redes sociales, WhatsApp o código QR.
+              </p>
+
+              <ul class="mt-6 space-y-3.5 text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-blue shrink-0 mt-0.5"></i>
+                  <span><strong>Cero mantenimiento de dominio:</strong> Abonás únicamente la creación de tu página web.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-blue shrink-0 mt-0.5"></i>
+                  <span><strong>Ideal para redes y WhatsApp:</strong> Perfecta para colocar en la biografía de Instagram y atender clientes.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-blue shrink-0 mt-0.5"></i>
+                  <span><strong>Actualizable a futuro:</strong> Podés sumarle un dominio propio más adelante cuando lo desees.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="https://wa.me/5493804148332?text=Hola%20G.A%20CENTER!%20Quiero%20consultar%20por%20una%20p%C3%A1gina%20web%20SIN%20DOMINIO"
+                 target="_blank" rel="noopener noreferrer"
+                 class="radial-glow-btn w-full py-4 text-sm">
+                <i data-lucide="zap" class="w-4 h-4 text-ga-blue"></i>
+                <span>Elegir Plan Sin Dominio</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- OPCIÓN 2: CON DOMINIO PROPIO -->
+          <div class="rounded-4xl ag-surface ag-float-card p-7 sm:p-10 border-2 border-ga-violet/50 flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <span class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-ga-violet to-ga-blue text-white text-xs font-bold uppercase tracking-wider">
+                  Presencia Corporativa
+                </span>
+                <span class="text-xs font-semibold text-ga-mint">★ .com / .com.ar</span>
+              </div>
+
+              <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                Web Con Dominio Propio
+              </h3>
+              <p class="mt-2 text-sm text-slate-300">
+                Configuramos tu web con el nombre exclusivo de tu marca (<code class="text-ga-mint font-semibold">.com</code> o <code class="text-ga-mint font-semibold">.com.ar</code>) para máxima autoridad y presencia en buscadores.
+              </p>
+
+              <ul class="mt-6 space-y-3.5 text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-mint shrink-0 mt-0.5"></i>
+                  <span><strong>Dirección exclusiva de tu marca:</strong> Genera máxima confianza y profesionalismo frente a tus clientes.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-mint shrink-0 mt-0.5"></i>
+                  <span><strong>Posicionamiento en Google:</strong> Optimizada para que encuentren tu negocio al buscar tus productos o servicios.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-ga-mint shrink-0 mt-0.5"></i>
+                  <span><strong>Gestión integral incluida:</strong> Nos ocupamos del registro, configuración DNS y seguridad SSL.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="https://wa.me/5493804148332?text=Hola%20G.A%20CENTER!%20Quiero%20consultar%20por%20una%20p%C3%A1gina%20web%20CON%20DOMINIO%20PROPIO"
+                 target="_blank" rel="noopener noreferrer"
+                 class="radial-glow-btn w-full py-4 text-sm">
+                <i data-lucide="crown" class="w-4 h-4 text-ga-mint"></i>
+                <span>Elegir Plan Con Dominio</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. SKIPER 31 — SCROLL ANIMATION 3D CHARACTERS & TECH STACK CON BRACKETS
+         ===================================================================== -->
+    <section id="tecnologia" class="relative py-24 overflow-hidden bg-[#050711] border-t border-white/10">
+      
+      <div id="skiper31-text-trigger" class="max-w-6xl mx-auto px-4 text-center py-8">
+        <span class="text-[11px] uppercase tracking-[0.28em] text-slate-400 block mb-4">Diseño &amp; Tecnología • G.A CENTER</span>
+        <div id="skiper31-chars"
+             class="font-display font-black text-3xl sm:text-6xl lg:text-7xl uppercase tracking-tighter leading-none select-none"
+             style="perspective: 600px;">
+        </div>
+      </div>
+
+      <div id="skiper31-icons-trigger" class="max-w-5xl mx-auto px-4 mt-12 text-center">
+        <p class="font-display flex items-center justify-center gap-3 sm:gap-5 text-lg sm:text-2xl font-semibold tracking-tight text-white mb-10">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 78" class="h-10 sm:h-12 text-ga-blue shrink-0">
+            <path fill="currentColor" d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"></path>
+          </svg>
+          <span class="ga-gradient-text font-bold">
+            equipamos tu web con todo lo que necesitás
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 27 78" class="h-10 sm:h-12 scale-x-[-1] text-ga-mint shrink-0">
+            <path fill="currentColor" d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"></path>
+          </svg>
+        </p>
+
+        <div id="skiper31-icons-row"
+             class="flex flex-wrap items-center justify-center gap-3 sm:gap-5 py-4"
+             style="perspective: 500px;">
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =====================================================================
+         8. NUEVA SECCIÓN DE PRESUPUESTO DIRECTO (Rediseñada desde cero,
+            SIN ejemplos de links ni subtítulos de ejemplo) + SKIPER 19
+         ===================================================================== -->
+    <section id="contacto" class="relative overflow-hidden pt-20 pb-16 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+
+      <!-- Skiper 19: SVG LinePath -->
+      <svg width="1278" height="2319" viewBox="0 0 1278 2319" fill="none" overflow="visible"
+           xmlns="http://www.w3.org/2000/svg"
+           class="pointer-events-none absolute -right-[35%] sm:-right-[15%] top-0 z-0 opacity-30 w-[850px] sm:w-[1150px]">
+        <defs>
+          <linearGradient id="skiper19-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="50%" stop-color="#38bdf8" />
+            <stop offset="100%" stop-color="#2dd4bf" />
+          </linearGradient>
+        </defs>
+        <path id="skiper19-path"
+              d="M876.605 394.131C788.982 335.917 696.198 358.139 691.836 416.303C685.453 501.424 853.722 498.43 941.95 409.714C1016.1 335.156 1008.64 186.907 906.167 142.846C807.014 100.212 712.699 198.494 789.049 245.127C889.053 306.207 986.062 116.979 840.548 43.3233C743.932 -5.58141 678.027 57.1682 672.279 112.188C666.53 167.208 712.538 172.943 736.353 163.088C760.167 153.234 764.14 120.924 746.651 93.3868C717.461 47.4252 638.894 77.8642 601.018 116.979C568.164 150.908 557 201.079 576.467 246.924C593.342 286.664 630.24 310.55 671.68 302.614C756.114 286.446 729.747 206.546 681.86 186.442C630.54 164.898 492 209.318 495.026 287.644C496.837 334.494 518.402 366.466 582.455 367.287C680.013 368.538 771.538 299.456 898.634 292.434C1007.02 286.446 1192.67 309.384 1242.36 382.258C1266.99 418.39 1273.65 443.108 1247.75 474.477C1217.32 511.33 1149.4 511.259 1096.84 466.093C1044.29 420.928 1029.14 380.576 1033.97 324.172C1038.31 273.428 1069.55 228.986 1117.2 216.384C1152.2 207.128 1188.29 213.629 1194.45 245.127C1201.49 281.062 1132.22 280.104 1100.44 272.673C1065.32 264.464 1044.22 234.837 1032.77 201.413C1019.29 162.061 1029.71 131.126 1056.44 100.965C1086.19 67.4032 1143.96 54.5526 1175.78 86.1513C1207.02 117.17 1186.81 143.379 1156.22 166.691C1112.57 199.959 1052.57 186.238 999.784 155.164C957.312 130.164 899.171 63.7054 931.284 26.3214C952.068 2.12513 996.288 3.87363 1007.22 43.58C1018.15 83.2749 1003.56 122.644 975.969 163.376C948.377 204.107 907.272 255.122 913.558 321.045C919.727 385.734 990.968 497.068 1063.84 503.35C1111.46 507.456 1166.79 511.984 1175.68 464.527C1191.52 379.956 1101.26 334.985 1030.29 377.017C971.109 412.064 956.297 483.647 953.797 561.655C947.587 755.413 1197.56 941.828 936.039 1140.66C745.771 1285.32 321.926 950.737 134.536 1202.19C-6.68295 1391.68 -53.4837 1655.38 131.935 1760.5C478.381 1956.91 1124.19 1515 1201.28 1997.83C1273.66 2451.23 100.805 1864.7 303.794 2668.89"
+              stroke="url(#skiper19-grad)"
+              stroke-width="18"
+              stroke-linecap="round" />
+      </svg>
+
+      <!-- Nuevo Panel Asimétrico de Contacto y Configuración (Sin ejemplos innecesarios) -->
+      <div class="relative z-10 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Columna Izquierda: Contacto Directo G.A CENTER -->
+          <div class="lg:col-span-5 rounded-4xl ag-surface p-7 sm:p-9 border border-white/15 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-6">
+                <img src="logo.jpg" alt="G.A CENTER" class="w-12 h-12 rounded-2xl object-cover border border-ga-violet/50" />
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-ga-mint block">Contacto Directo</span>
+                  <h3 class="font-display font-bold text-xl text-white">Empecemos tu proyecto</h3>
+                </div>
+              </div>
+
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Seleccioná las opciones que buscás para tu sitio web o escribinos directamente para recibir asesoramiento personalizado.
+              </p>
+
+              <!-- Resumen dinámico de selección -->
+              <div class="mt-6 p-4 rounded-2xl bg-[#05070f] border border-white/10 space-y-2.5">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Tu configuración actual</span>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-400">Proyecto:</span>
+                  <strong id="summary-tipo" class="text-ga-blue">Catálogo / Tienda</strong>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-400">Dominio:</span>
+                  <strong id="summary-dom" class="text-ga-mint">Sin Dominio</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10 space-y-3">
+              <a href="https://wa.me/5493804148332" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-bold text-white transition">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                  <span>Atención por WhatsApp</span>
+                </span>
+                <span class="text-ga-mint">Escribir →</span>
+              </a>
+
+              <a href="https://www.instagram.com/g.a.center/" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-bold text-white transition">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i>
+                  <span>@g.a.center</span>
+                </span>
+                <span class="text-ga-blue">Instagram →</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Selector Limpio y Directo -->
+          <div class="lg:col-span-7 rounded-4xl ag-surface p-7 sm:p-9 border border-white/15 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                  Solicitar Presupuesto
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                  Completá tus preferencias y te enviaremos la propuesta por WhatsApp.
+                </p>
+              </div>
+
+              <!-- Nombre del negocio -->
+              <div>
+                <label for="input-negocio" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                  Nombre de tu marca o rubro
+                </label>
+                <input id="input-negocio" type="text" placeholder="Ingresá el nombre de tu negocio..."
+                       class="w-full px-4 py-3.5 rounded-2xl bg-[#05070f] border border-white/15 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-ga-blue transition" />
+              </div>
+
+              <!-- Tipo de página (Limpio, sin ejemplos) -->
+              <div>
+                <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2.5">
+                  Tipo de página web
+                </span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="selector-tipo">
+                  <button type="button" data-tipo="Catálogo / Tienda"
+                          class="quote-type-btn px-3.5 py-3 rounded-xl border border-ga-blue bg-ga-blue/15 text-white text-xs font-bold text-center transition cursor-pointer">
+                    Catálogo / Tienda
+                  </button>
+                  <button type="button" data-tipo="Turnero / Gestión"
+                          class="quote-type-btn px-3.5 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold text-center transition cursor-pointer">
+                    Turnero / Gestión
+                  </button>
+                  <button type="button" data-tipo="Vehículos / Stock"
+                          class="quote-type-btn px-3.5 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold text-center transition cursor-pointer">
+                    Vehículos / Stock
+                  </button>
+                  <button type="button" data-tipo="Web Profesional"
+                          class="quote-type-btn px-3.5 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold text-center transition cursor-pointer">
+                    Web Profesional
+                  </button>
+                </div>
+              </div>
+
+              <!-- Modalidad de Dominio -->
+              <div>
+                <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2.5">
+                  Modalidad de publicación
+                </span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="selector-dominio">
+                  <button type="button" data-dom="Sin Dominio"
+                          class="quote-dom-btn px-4 py-3 rounded-xl border border-ga-blue bg-ga-blue/15 text-white text-xs font-bold transition cursor-pointer">
+                    Sin Dominio
+                  </button>
+                  <button type="button" data-dom="Con Dominio Propio"
+                          class="quote-dom-btn px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold transition cursor-pointer">
+                    Con Dominio Propio
+                  </button>
+                  <button type="button" data-dom="A definir con asesoramiento"
+                          class="quote-dom-btn px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold transition cursor-pointer">
+                    Necesito Asesoramiento
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span class="text-xs text-slate-400">Respuesta inmediata por WhatsApp</span>
+              <button type="button" id="btn-enviar-cotizacion"
+                      class="radial-glow-btn w-full sm:w-auto px-8 py-4 text-sm">
+                <i data-lucide="send" class="w-4 h-4 text-ga-mint"></i>
+                <span>Consultar por WhatsApp</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           BLOQUE GIGANTE FINAL ESTILO SKIPER 19 + LINKS SKIPER 40
+           ===================================================================== -->
+      <div class="relative z-10 max-w-7xl mx-auto mt-20 rounded-4xl bg-gradient-to-br from-[#101528] via-[#0b1020] to-[#071921] border border-white/15 p-6 sm:p-12 shadow-2xl overflow-hidden">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[650px] h-[240px] bg-gradient-to-r from-ga-violet/25 via-ga-blue/25 to-ga-mint/25 blur-[110px] pointer-events-none"></div>
+
+        <h2 class="mt-2 text-center font-display font-black text-[13vw] sm:text-[11vw] leading-[0.9] tracking-tighter ga-gradient-text select-none">
+          G.A CENTER
+        </h2>
+
+        <div class="mt-10 pt-8 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          
+          <div class="flex items-center gap-4">
+            <img src="logo.jpg" alt="G.A CENTER" class="w-14 h-14 rounded-2xl object-cover border border-white/15 shadow-lg" />
+            <div>
+              <p class="font-display font-bold text-white text-lg">G.A CENTER • Web Studio</p>
+              <p class="text-xs text-slate-400">Páginas web con dominio y sin dominio.</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold text-slate-200">
+            <a href="https://agautomotores.github.io/A.GAUTOMOTORES/" target="_blank" rel="noopener noreferrer" class="skiper-link-001">
+              <span>A.G Automotores</span>
+              <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://agautomotores.github.io/TurnosTallerAngelelli/" target="_blank" rel="noopener noreferrer" class="skiper-link-001">
+              <span>Turnos Taller Angelelli</span>
+              <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://gacenter.github.io/NYGIMPORTADOS-2/" target="_blank" rel="noopener noreferrer" class="skiper-link-001">
+              <span>N&amp;G Importados</span>
+              <svg class="arrow-diag" fill="none" viewBox="0 0 10 10"><path d="M1.004 9.166 9.337.833m0 0v8.333m0-8.333H1.004" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="https://wa.me/5493804148332" target="_blank" rel="noopener noreferrer" class="social-flip-btn w-48">
+              <div class="social-flip-inner">
+                <div class="social-flip-front">
+                  <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                  <span>WhatsApp Oficial</span>
+                </div>
+                <div class="social-flip-back whatsapp">
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  <span>Abrir WhatsApp</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/g.a.center/" target="_blank" rel="noopener noreferrer" class="social-flip-btn w-48">
+              <div class="social-flip-inner">
+                <div class="social-flip-front">
+                  <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i>
+                  <span>@g.a.center</span>
+                </div>
+                <div class="social-flip-back instagram">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                  <span>Ver Instagram</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 uppercase tracking-wider">
+          <p>© 2026 G.A CENTER — Todos los derechos reservados.</p>
+          <p class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-ga-mint animate-ping"></span>
+            <span>Disponibles para nuevos proyectos web</span>
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/5493804148332?text=Hola%20G.A%20CENTER!%20Quiero%20hacer%20una%20consulta%20por%20una%20p%C3%A1gina%20web"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Chatear por WhatsApp"
+     class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-400 text-white flex items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.5)] hover:scale-110 transition-transform">
+    <i data-lucide="message-circle" class="w-7 h-7"></i>
+  </a>
+
+  <!-- =====================================================================
+       SCRIPTS DE ANIMACIÓN E INTERACTIVIDAD
+       ===================================================================== -->
+  <script>
+    lucide.createIcons();
+
+    /* ---------------------------------------------------------------------
+       1. KINETIC TEXT LOADER
+       --------------------------------------------------------------------- */
+    (function initKineticLoader() {
+      const text = "G.A CENTER";
+      const container = document.getElementById("kinetic-text-container");
+      const loader = document.getElementById("kinetic-loader");
+      const bar = document.getElementById("loader-bar");
+
+      if (container) {
+        container.innerHTML = text
+          .split("")
+          .map((ch, idx) => {
+            const safeChar = ch === " " ? "&nbsp;" : ch;
+            return `<span class="kinetic-char" style="animation-delay:${idx * 0.06}s">${safeChar}</span>`;
+          })
+          .join("");
+      }
+
+      requestAnimationFrame(() => {
+        if (bar) bar.style.width = "100%";
+      });
+
+      setTimeout(() => {
+        if (loader) loader.classList.add("loaded");
+      }, 850);
+    })();
+
+    /* ---------------------------------------------------------------------
+       2. SPOTLIGHT NAVBAR + MOBILE MENU
+       --------------------------------------------------------------------- */
+    (function initSpotlightNavbar() {
+      const nav = document.getElementById("spotlight-navbar");
+      const pill = document.getElementById("nav-active-pill");
+      const links = document.querySelectorAll(".nav-spot-link");
+
+      if (nav && pill) {
+        nav.addEventListener("mousemove", (e) => {
+          const rect = nav.getBoundingClientRect();
+          nav.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+          nav.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+          nav.style.setProperty("--spot-opacity", "1");
+        });
+
+        nav.addEventListener("mouseleave", () => {
+          nav.style.setProperty("--spot-opacity", "0");
+          pill.style.opacity = "0";
+        });
+
+        links.forEach((link) => {
+          link.addEventListener("mouseenter", () => {
+            const navRect = nav.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            pill.style.width = `${linkRect.width}px`;
+            pill.style.left = `${linkRect.left - navRect.left}px`;
+            pill.style.opacity = "1";
+          });
+        });
+      }
+
+      const btnMobile = document.getElementById("btn-mobile-menu");
+      const drawer = document.getElementById("mobile-menu-drawer");
+      if (btnMobile && drawer) {
+        btnMobile.addEventListener("click", () => drawer.classList.toggle("hidden"));
+        document.querySelectorAll(".mobile-nav-link").forEach((el) => {
+          el.addEventListener("click", () => drawer.classList.add("hidden"));
+        });
+      }
+    })();
+
+    /* ---------------------------------------------------------------------
+       3. RADIAL GLOW BUTTON MOUSE TRACKING
+       --------------------------------------------------------------------- */
+    document.querySelectorAll(".radial-glow-btn").forEach((btn) => {
+      btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        btn.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
+        btn.style.setProperty("--btn-y", `${e.clientY - rect.top}px`);
+      });
+    });
+
+    /* ---------------------------------------------------------------------
+       4. HERO CLEAN DYNAMIC PHRASE (Nítido, sin distorsión)
+       --------------------------------------------------------------------- */
+    (function initCleanHeroPhrase() {
+      const phrases = [
+        "tu marca en internet.",
+        "con o sin dominio propio.",
+        "catálogos con WhatsApp.",
+        "sistemas y turneros online.",
+        "concesionarias y negocios."
+      ];
+      let current = 0;
+      const el = document.getElementById("hero-dynamic-phrase");
+      if (!el) return;
+
+      setInterval(() => {
+        el.classList.add("is-switching");
+        setTimeout(() => {
+          current = (current + 1) % phrases.length;
+          el.textContent = phrases[current];
+          el.classList.remove("is-switching");
+        }, 320);
+      }, 3000);
+    })();
+
+    /* ---------------------------------------------------------------------
+       5. HERO GRID AUTOMATED STAGE SCRIPT (De index (3).tsx)
+       --------------------------------------------------------------------- */
+    (function initHeroGridStage() {
+      const cursor = document.getElementById("hg-cursor");
+      const seg0 = document.getElementById("hg-seg-0");
+      const seg1 = document.getElementById("hg-seg-1");
+      const seg2 = document.getElementById("hg-seg-2");
+      const pubBtn = document.getElementById("hg-publish-btn");
+      const pubText = document.getElementById("hg-publish-text");
+      const shipCheck = document.getElementById("hg-ship-check");
+      const frame = document.getElementById("hg-frame");
+      const gapVal = document.getElementById("hg-gap-val");
+
+      if (!cursor) return;
+
+      function setSegActive(idx) {
+        [seg0, seg1, seg2].forEach((el, i) => {
+          if (!el) return;
+          el.className =
+            i === idx
+              ? "px-3 py-1 rounded-lg transition-colors bg-ga-violet/25 text-white"
+              : "px-3 py-1 rounded-lg transition-colors text-slate-400";
+        });
+      }
+
+      function runDraftCycle() {
+        // Estado inicial
+        setSegActive(0);
+        if (pubText) pubText.textContent = "Publicar";
+        if (shipCheck) {
+          shipCheck.textContent = "";
+          shipCheck.className = "w-4 h-4 rounded border border-white/25 flex items-center justify-center text-[10px] text-slate-950 font-bold transition-colors";
+        }
+        if (frame) frame.setAttribute("data-selected", "false");
+        if (gapVal) gapVal.textContent = "24";
+
+        // 1. Mover a pestaña "Código"
+        setTimeout(() => {
+          cursor.style.transform = "translate3d(95px, 22px, 0)";
+        }, 500);
+        setTimeout(() => setSegActive(1), 1050);
+
+        // 2. Mover a botón "Publicar"
+        setTimeout(() => {
+          cursor.style.transform = "translate3d(340px, 88px, 0)";
+        }, 1600);
+        setTimeout(() => {
+          if (pubText) pubText.textContent = "Publicando...";
+        }, 2150);
+        setTimeout(() => {
+          setSegActive(2);
+          if (pubText) pubText.textContent = "✓ Live";
+          if (shipCheck) {
+            shipCheck.textContent = "✓";
+            shipCheck.className = "w-4 h-4 rounded bg-ga-mint flex items-center justify-center text-[10px] text-slate-950 font-bold transition-colors";
+          }
+        }, 2900);
+
+        // 3. Seleccionar el Frame de diseño
+        setTimeout(() => {
+          cursor.style.transform = "translate3d(280px, 165px, 0)";
+        }, 3500);
+        setTimeout(() => {
+          if (frame) frame.setAttribute("data-selected", "true");
+        }, 4050);
+
+        // 4. Click en '+' del Grid Stepper (24 -> 25)
+        setTimeout(() => {
+          cursor.style.transform = "translate3d(380px, 22px, 0)";
+        }, 4700);
+        setTimeout(() => {
+          if (gapVal) gapVal.textContent = "25";
+        }, 5250);
+      }
+
+      runDraftCycle();
+      setInterval(runDraftCycle, 6800);
+    })();
+
+    /* ---------------------------------------------------------------------
+       6. DARK HERO DEPLOYMENTS LOOP (De index (2).tsx)
+       --------------------------------------------------------------------- */
+    (function initDarkHeroLoop() {
+      const row = document.getElementById("dh-live-row");
+      const badge = document.getElementById("dh-status-badge");
+      const dot = document.getElementById("dh-status-dot");
+      const word = document.getElementById("dh-status-word");
+      const timer = document.getElementById("dh-timer");
+      const currentBadge = document.getElementById("dh-current-badge");
+
+      if (!row || !word || !timer) return;
+
+      function cycleDeploy() {
+        // Inicia Building
+        row.classList.add("is-open");
+        word.textContent = "Building";
+        if (badge) badge.className = "px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-bold flex items-center gap-1.5 transition-all";
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-amber-400 animate-ping";
+        if (currentBadge) currentBadge.style.opacity = "0.35";
+        timer.textContent = "9s";
+
+        setTimeout(() => { timer.textContent = "18s"; }, 700);
+        setTimeout(() => { timer.textContent = "27s"; }, 1400);
+        setTimeout(() => {
+          word.textContent = "Online";
+          timer.textContent = "38s";
+          if (badge) badge.className = "px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-all";
+          if (dot) dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+          if (currentBadge) currentBadge.style.opacity = "1";
+        }, 2200);
+      }
+
+      setInterval(cycleDeploy, 5600);
+    })();
+
+    /* ---------------------------------------------------------------------
+       7. WAVE GRID BACKGROUND CANVAS
+       --------------------------------------------------------------------- */
+    (function initWaveGridBackground() {
+      const canvas = document.getElementById("wave-grid-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+      let mouse = { x: width / 2, y: height / 2, active: false };
+      let time = 0;
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
+
+      function renderWaveGrid() {
+        ctx.clearRect(0, 0, width, height);
+        time += 0.022;
+
+        const cols = 26;
+        const rows = 16;
+        const cellW = width / (cols - 1);
+        const cellH = height / (rows - 1);
+
+        const points = [];
+        for (let r = 0; r < rows; r++) {
+          points[r] = [];
+          for (let c = 0; c < cols; c++) {
+            const baseX = c * cellW;
+            const baseY = r * cellH;
+            const dx = baseX - mouse.x;
+            const dy = baseY - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const mouseWave = mouse.active
+              ? Math.max(0, (240 - dist) / 240) * Math.sin(dist * 0.03 - time * 2) * 18
+              : 0;
+
+            const waveY =
+              Math.sin(c * 0.35 + time) * 8 +
+              Math.cos(r * 0.4 + time * 0.8) * 8 +
+              mouseWave;
+
+            points[r][c] = { x: baseX, y: baseY + waveY };
+          }
+        }
+
+        ctx.lineWidth = 1;
+        for (let r = 0; r < rows; r++) {
+          ctx.beginPath();
+          ctx.strokeStyle = r % 2 === 0 ? "rgba(139, 92, 246, 0.11)" : "rgba(56, 189, 248, 0.09)";
+          for (let c = 0; c < cols; c++) {
+            const p = points[r][c];
+            if (c === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          }
+          ctx.stroke();
+        }
+
+        for (let c = 0; c < cols; c++) {
+          ctx.beginPath();
+          ctx.strokeStyle = "rgba(45, 212, 191, 0.07)";
+          for (let r = 0; r < rows; r++) {
+            const p = points[r][c];
+            if (r === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          }
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(renderWaveGrid);
+      }
+
+      renderWaveGrid();
+    })();
+
+    /* ---------------------------------------------------------------------
+       8. VISTA EN VIVO (IFRAME) EN TARJETAS DEL PORTAFOLIO
+       --------------------------------------------------------------------- */
+    function toggleLivePreview(iframeId, btnEl) {
+      const iframe = document.getElementById(iframeId);
+      if (!iframe) return;
+
+      const isHidden = iframe.classList.contains("hidden");
+      if (isHidden) {
+        if (!iframe.getAttribute("src")) {
+          iframe.setAttribute("src", iframe.getAttribute("data-src"));
+        }
+        iframe.classList.remove("hidden");
+        btnEl.innerHTML = `<i data-lucide="x" class="w-3.5 h-3.5"></i><span>Cerrar Vista en Vivo</span>`;
+      } else {
+        iframe.classList.add("hidden");
+        btnEl.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5"></i><span>Vista Interactiva en Vivo</span>`;
+      }
+      lucide.createIcons();
+    }
+
+    /* ---------------------------------------------------------------------
+       9. SKIPER 16 + SKIPER 31 + SKIPER 19 SCROLL ANIMATIONS
+       --------------------------------------------------------------------- */
+    (function initSkiperScrollAnimations() {
+      const skiper31Text = "TU MARCA EN INTERNET";
+      const charsContainer = document.getElementById("skiper31-chars");
+      const charArray = skiper31Text.split("");
+      const charCenterIndex = Math.floor(charArray.length / 2);
+
+      if (charsContainer) {
+        charsContainer.innerHTML = charArray
+          .map((ch, idx) => {
+            const isSpace = ch === " ";
+            return `<span class="skiper31-char inline-block ga-gradient-text ${
+              isSpace ? "w-3 sm:w-5" : ""
+            }" data-index="${idx}">${isSpace ? "&nbsp;" : ch}</span>`;
+          })
+          .join("");
+      }
+
+      const techItems = [
+        { icon: "globe", label: "Con o Sin Dominio" },
+        { icon: "smartphone", label: "Diseño Mobile" },
+        { icon: "shopping-cart", label: "Pedidos WhatsApp" },
+        { icon: "calendar-check", label: "Turneros Online" },
+        { icon: "cloud", label: "Alojamiento Cloud" },
+        { icon: "zap", label: "Carga Rápida" },
+        { icon: "shield-check", label: "Seguridad SSL" }
+      ];
+      const iconsRow = document.getElementById("skiper31-icons-row");
+      const iconCenterIndex = Math.floor(techItems.length / 2);
+
+      if (iconsRow) {
+        iconsRow.innerHTML = techItems
+          .map(
+            (item, idx) => `
+            <div class="skiper31-icon-card ag-surface border border-white/15 rounded-2xl px-4 py-3.5 flex flex-col items-center gap-2 w-28 sm:w-32"
+                 data-index="${idx}">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ga-violet/30 via-ga-blue/25 to-ga-mint/30 flex items-center justify-center text-ga-mint">
+                <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[11px] font-bold text-slate-200 text-center leading-tight">${item.label}</span>
+            </div>
+          `
+          )
+          .join("");
+        lucide.createIcons();
+      }
+
+      const skiper19Path = document.getElementById("skiper19-path");
+      let totalPathLen = 0;
+      if (skiper19Path) {
+        totalPathLen = skiper19Path.getTotalLength();
+        skiper19Path.style.strokeDasharray = `${totalPathLen}`;
+        skiper19Path.style.strokeDashoffset = `${totalPathLen * 0.5}`;
+      }
+
+      const charEls = document.querySelectorAll(".skiper31-char");
+      const iconEls = document.querySelectorAll(".skiper31-icon-card");
+      const stickyCards = document.querySelectorAll(".skiper16-card-wrapper");
+      const textTrigger = document.getElementById("skiper31-text-trigger");
+      const iconsTrigger = document.getElementById("skiper31-icons-trigger");
+      const contactoSection = document.getElementById("contacto");
+
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function onScrollUpdate() {
+        const vh = window.innerHeight;
+
+        stickyCards.forEach((wrapper, idx) => {
+          const card = wrapper.querySelector(".skiper16-card");
+          if (!card) return;
+          const rect = wrapper.getBoundingClientRect();
+          const stickyTop = 96 + idx * 16;
+          if (rect.top <= stickyTop + 5) {
+            const scrolledPast = clamp((stickyTop - rect.top) / 420, 0, 1);
+            const targetScale = 1 - (stickyCards.length - idx - 1) * 0.045 * scrolledPast;
+            card.style.transform = `scale(${clamp(targetScale, 0.88, 1)})`;
+          } else {
+            card.style.transform = "scale(1)";
+          }
+        });
+
+        if (textTrigger) {
+          const rect = textTrigger.getBoundingClientRect();
+          const progress = clamp(1 - (rect.top - vh * 0.25) / (vh * 0.65), 0, 1);
+          const factor = 1 - progress;
+
+          charEls.forEach((el) => {
+            const idx = Number(el.dataset.index || 0);
+            const distFromCenter = idx - charCenterIndex;
+            const x = distFromCenter * 38 * factor;
+            const rotateX = distFromCenter * 42 * factor;
+            el.style.transform = `translate3d(${x}px, 0, 0) rotateX(${rotateX}deg)`;
+          });
+        }
+
+        if (iconsTrigger) {
+          const rect = iconsTrigger.getBoundingClientRect();
+          const progress = clamp(1 - (rect.top - vh * 0.3) / (vh * 0.65), 0, 1);
+          const factor = 1 - progress;
+
+          iconEls.forEach((el) => {
+            const idx = Number(el.dataset.index || 0);
+            const distFromCenter = idx - iconCenterIndex;
+            const x = distFromCenter * 55 * factor;
+            const rotate = distFromCenter * 28 * factor;
+            const y = -Math.abs(distFromCenter) * 18 * factor;
+            const scale = 0.78 + 0.22 * progress;
+            el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
+          });
+        }
+
+        if (contactoSection && skiper19Path && totalPathLen > 0) {
+          const rect = contactoSection.getBoundingClientRect();
+          const progress = clamp((vh - rect.top) / (rect.height + vh * 0.5), 0, 1);
+          const drawFraction = 0.35 + progress * 0.65;
+          skiper19Path.style.strokeDashoffset = `${totalPathLen * (1 - drawFraction)}`;
+        }
+      }
+
+      window.addEventListener("scroll", onScrollUpdate, { passive: true });
+      onScrollUpdate();
+    })();
+
+    /* ---------------------------------------------------------------------
+       10. CONFIGURADOR DE PRESUPUESTO LIMPIO (Sin ejemplos de URLs ni subtítulos)
+       --------------------------------------------------------------------- */
+    (function initCleanConfigurator() {
+      const inputNegocio = document.getElementById("input-negocio");
+      const typeBtns = document.querySelectorAll(".quote-type-btn");
+      const domBtns = document.querySelectorAll(".quote-dom-btn");
+      const summaryTipo = document.getElementById("summary-tipo");
+      const summaryDom = document.getElementById("summary-dom");
+      const btnEnviar = document.getElementById("btn-enviar-cotizacion");
+
+      let selectedTipo = "Catálogo / Tienda";
+      let selectedDom = "Sin Dominio";
+
+      typeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          typeBtns.forEach((b) => {
+            b.className =
+              "quote-type-btn px-3.5 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold text-center transition cursor-pointer";
+          });
+          btn.className =
+            "quote-type-btn px-3.5 py-3 rounded-xl border border-ga-blue bg-ga-blue/15 text-white text-xs font-bold text-center transition cursor-pointer";
+          selectedTipo = btn.getAttribute("data-tipo") || selectedTipo;
+          if (summaryTipo) summaryTipo.textContent = selectedTipo;
+        });
+      });
+
+      domBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          domBtns.forEach((b) => {
+            b.className =
+              "quote-dom-btn px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white text-xs font-bold transition cursor-pointer";
+          });
+          btn.className =
+            "quote-dom-btn px-4 py-3 rounded-xl border border-ga-blue bg-ga-blue/15 text-white text-xs font-bold transition cursor-pointer";
+          selectedDom = btn.getAttribute("data-dom") || selectedDom;
+          if (summaryDom) summaryDom.textContent = selectedDom;
+        });
+      });
+
+      if (btnEnviar) {
+        btnEnviar.addEventListener("click", () => {
+          const nombre =
+            inputNegocio && inputNegocio.value.trim()
+              ? inputNegocio.value.trim()
+              : "Mi negocio";
+          const mensaje =
+            `Hola G.A CENTER! 👋 Quiero pedir presupuesto para una página web:\n` +
+            `• Marca/Rubro: *${nombre}*\n` +
+            `• Tipo de web: *${selectedTipo}*\n` +
+            `• Modalidad: *${selectedDom}*`;
+          const url = `https://wa.me/5493804148332?text=${encodeURIComponent(mensaje)}`;
+          window.open(url, "_blank", "noopener,noreferrer");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
